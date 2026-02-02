@@ -472,8 +472,11 @@ def train_lightgbm(feat, labels, file_paths):
     print(classification_report(y_test, y_pred, target_names=list(class2idx.keys())))
 
     # 保存LightGBM模型
-    lgb_model.save_model(os.path.join(MODEL_SAVE_PATH, "lightgbm_best.txt"))
-    print(f"LightGBM模型保存至：{os.path.join(MODEL_SAVE_PATH, 'lightgbm_best.txt')}")
+    lgb_model.booster_.save_model(
+        os.path.join(MODEL_SAVE_PATH, "lightgbm_best.bin"),
+        format="binary"  # 明确指定二进制格式
+    )
+    print(f"LightGBM模型保存至：{os.path.join(MODEL_SAVE_PATH, 'lightgbm_best.bin')}")
     # 返回值新增test_file_paths
     return lgb_model, y_test, y_pred, test_file_paths
 
