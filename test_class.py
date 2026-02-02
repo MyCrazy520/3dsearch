@@ -188,7 +188,7 @@ class STEPTypePredictor:
 
     def _load_lightgbm(self):
         """加载训练好的LightGBM模型"""
-        lgb_path = os.path.join(MODEL_SAVE_PATH, "lightgbm_best.txt")
+        lgb_path = os.path.join(MODEL_SAVE_PATH, "lightgbm_best.bin")
         if not os.path.exists(lgb_path):
             raise FileNotFoundError(f"未找到LightGBM模型：{lgb_path}\n请先运行训练代码生成模型")
         return lgb.Booster(model_file=lgb_path)
