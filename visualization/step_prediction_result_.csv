@@ -1,0 +1,116 @@
+﻿文件路径,预测类别,预测概率,状态
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT4216.9-1984_15-2.5GB4216.9-84_灰铸铁管法兰用石棉橡胶垫片(1).step,法兰国家标准 (GB),0.9861,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT4216.9-1984_15-2.5GB4216.9-84_灰铸铁管法兰用石棉橡胶垫片.step,法兰国家标准 (GB),0.9861,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT4622.1-2022_102304_缠绕式垫片凹凸面法兰用.step,法兰国家标准 (GB),0.9926,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT4622.2-2022_102.5304_缠绕式垫片榫槽面法兰用.step,法兰国家标准 (GB),0.9924,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT6070-2007_10304_活套真空法兰.step,法兰国家标准 (GB),0.9918,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT6070-2007_10347_固定真空法兰.step,法兰国家标准 (GB),0.9921,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT6070-2007_10碳素钢_卡钳法兰.step,轴承国家标准(GB),0.883,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT6071-2003_16不锈钢_超高真空法兰肩环.step,法兰国家标准 (GB),0.5412,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GBT6071-2003_16有色金属_超高真空法兰盲型.step,法兰国家标准 (GB),0.6787,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T15530.6-2008APN6-15碳素结构钢.step,法兰国家标准 (GB),0.9929,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T19066.2-2020A11508.step,法兰国家标准 (GB),0.9739,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T19675.1-20232.510CRS.step,法兰国家标准 (GB),0.9912,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T4622.1-202210103304.step,法兰国家标准 (GB),0.9922,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T4622.1-2022PN1601254.5310.step,法兰国家标准 (GB),0.9229,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T6070-200710347.step,轴承国家标准(GB),0.9905,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT100-1986_1.6×8_开槽沉头木螺钉.step,螺钉国家标准(GB),0.994,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT101-1986_M1.6×6_开槽半沉头木螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT102-1986_M6×40_六角头木螺钉.step,螺钉国家标准(GB),0.994,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT65-2016_M1.6x5_开槽圆柱头螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT67-2016_M1.6x10-钢_开槽盘头螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT68-2016_M1.6x4-钢_开槽沉头螺钉.step,螺钉国家标准(GB),0.9932,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT69-2016_M1.6×2.5有色金属电镀_开槽半沉头螺钉.step,螺钉国家标准(GB),0.9933,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT70.1-2008_M1.6X2.5-W_内六角圆柱头螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT70.2-2015_M4×10_内六角平圆头螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT70.3-2008_M3x12_内六角沉头螺钉.step,螺钉国家标准(GB),0.9939,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT71-2018_M1.2x3-钢_开槽锥端紧定螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT72-1988_M3×414H不经处理_开槽锥端定位螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT73-2017_M1.2x3-钢_开槽平端紧定螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT74-2018_M1.6×2A1-50简单处理A_开槽凹端紧定螺钉.step,螺钉国家标准(GB),0.9908,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT75-2018_M1.6×2.5A2简单处理A_开槽长圆柱端紧定螺钉.step,螺钉国家标准(GB),0.9922,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT77-2007_M1.6x2_内六角平端紧定螺钉.step,螺钉国家标准(GB),0.9613,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT78-2007_M1.6x3_内六角锥端紧定螺钉.step,螺钉国家标准(GB),0.9924,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT79-2007_M2×6AL4简单处理_内六角圆柱端紧定螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT80-2007_M1.6x8-钢_内六角凹端紧定螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT818-2016_M1.6x3-H_十字槽盘头螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT819.1-2016_M1.6x3-H_十字槽沉头螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT819.2-2016_M2x3H1_十字槽沉头螺钉.step,螺钉国家标准(GB),0.9921,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT821-2018_M5×814H不经处理A_方头平端紧定螺钉.step,螺钉国家标准(GB),0.994,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT822-2016_M2.5x3H_十字槽圆柱头螺钉.step,螺钉国家标准(GB),0.9933,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT823-2016_M2x4_十字槽小盘头螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT828-1988_M1.6x1.5x1.2-钢_开槽盘头定位螺钉.step,螺钉国家标准(GB),0.993,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT829-1988_M1.6×1.5×114H不经处理_开槽圆柱端定位螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT83-2018_M8×1614H不经处理A_方头长圆柱球面端紧定螺钉.step,螺钉国家标准(GB),0.9921,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT830-1988_M1.5×18.8.1不经处理_开槽圆柱头轴位螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT831-1988_M1.6×214H不经处理_开槽无头轴位螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT832-1988_M1.6×4A型4.6_开槽带孔球面圆柱头螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT833-1988_1.6×54.6_开槽大圆柱头螺钉.step,螺钉国家标准(GB),0.9925,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT834-1988_M1.6x4-钢_滚花高头螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT835-1988_M1.6×2钢4.8镀锌钝化_滚花平头螺钉.step,螺钉国家标准(GB),0.9858,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT836-1988_M1.63C4-50不经处理_滚花小头螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT837-1988_M3x10-钢_开槽盘头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x30-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x30-钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x35-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x40-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x45-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x50-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x55-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x60-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x65-不锈钢_六角头不脱出螺钉(1).step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x65-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x70-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x75-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9934,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M10x80-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9932,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x100-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9931,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x30-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x30-钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x35-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x40-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x45-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x50-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x55-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x60-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x65-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x70-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x75-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x80-不锈钢_六角头不脱出螺钉(1).step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x80-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M12x90-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x35-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x40-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x45-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x50-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x55-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x60-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x65-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x70-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M14x75-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M5x14-钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x20-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x25-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x30-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x35-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x40-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x45-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M6x50-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9935,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x25-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x25-钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x30-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x35-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x40-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x45-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x50-不锈钢_六角头不脱出螺钉(1).step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x50-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x55-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x60-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT838-1988_M8x65-不锈钢_六角头不脱出螺钉.step,螺钉国家标准(GB),0.9936,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT84-2018_M5×1022H不经处理A_方头凹端紧定螺钉.step,螺钉国家标准(GB),0.9923,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT85-2018_M5×1214H不经处理A_方头长圆柱端紧定螺钉.step,螺钉国家标准(GB),0.9923,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT86-2018_M5×1233H不经处理A_方头短圆柱锥端紧定螺钉.step,螺钉国家标准(GB),0.9924,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GBT99-1986_M1.6×12_开槽圆头木螺钉.step,螺钉国家标准(GB),0.9897,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GB_T78-2007M1.6×3钢.step,螺钉国家标准(GB),0.9938,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GB_T820-2015GBT820-2015_M1.6x4H-钢十字槽半沉头螺钉.step,螺钉国家标准(GB),0.9937,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GB_T825-1988吊环螺钉A型M16J.step,轴承国家标准(GB),0.9926,成功
+D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\1\国家标准GB_GB_T9074.18-2017_S1ST2.216_十字槽盘头自攻螺钉和平垫圈组合件.step,螺钉国家标准(GB),0.9937,成功

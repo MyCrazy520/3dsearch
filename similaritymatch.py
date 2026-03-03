@@ -1,16 +1,14 @@
-# -------------------------- 完整依赖导入（新增FAISS） --------------------------
+# -------------------------- 完整依赖导入（解决所有未定义错误） --------------------------
 import os
 import sys
 import numpy as np
 import pandas as pd
-import torch
-import torch.nn as nn
+import torch  # PyTorch核心库
+import torch.nn as nn  # PyTorch神经网络模块（解决nn未定义）
 import lightgbm as lgb
 import open3d as o3d
-import faiss  # 新增FAISS依赖
 from tqdm import tqdm
 import warnings
-
 warnings.filterwarnings('ignore')
 
 # 全局配置（与训练脚本保持一致）
@@ -19,18 +17,12 @@ POINT_NUM = 1024
 FEATURE_SAVE_PATH = r"./step_features"
 MODEL_SAVE_PATH = r"./trained_models"
 VIS_SAVE_PATH = r"./visualization"
-# 新增FAISS配置
-FAISS_INDEX_PATH = os.path.join(MODEL_SAVE_PATH, "step_feature_faiss_index.index")  # FAISS索引保存路径
-FAISS_NLIST = 100  # IVF索引聚类数（经验值：样本数^(1/3)，如10万样本设为50）
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# FAISS设备自动选择
-FAISS_DEVICE = faiss.StandardGpuResources() if torch.cuda.is_available() else None
-
 os.environ["PATH"] += os.pathsep + os.path.join(FREECAD_PATH, "bin")
 sys.path.append(os.path.join(FREECAD_PATH, "bin"))
 
-
-# -------------------------- 复用原有核心类/函数（完全不变） --------------------------
+# -------------------------- 复用训练脚本的核心类/函数（保证逻辑一致） --------------------------
+# TNet变换网络（与训练脚本完全一致）
 class TNet(nn.Module):
     def __init__(self, k=3):
         super(TNet, self).__init__()
@@ -62,7 +54,7 @@ class TNet(nn.Module):
         x = x + iden
         return x.view(batch_size, self.k, self.k)
 
-
+# PointNet特征提取器（与训练脚本完全一致）
 class PointNetFeatureExtractor(nn.Module):
     def __init__(self, feature_dim=1024):
         super(PointNetFeatureExtractor, self).__init__()
@@ -96,7 +88,7 @@ class PointNetFeatureExtractor(nn.Module):
         global_feat = global_feat.view(batch_size, -1)
         return global_feat
 
-
+# PointNet分类器（仅用于加载预训练权重，与训练脚本完全一致）
 class PointNetClassifier(nn.Module):
     def __init__(self, num_classes, feature_dim=1024):
         super(PointNetClassifier, self).__init__()
@@ -118,7 +110,7 @@ class PointNetClassifier(nn.Module):
         x = self.fc3(x)
         return x, global_feat
 
-
+# STEP转点云（与训练脚本完全一致，保证特征提取一致性）
 def step2point_cloud(step_file_path, num_points=POINT_NUM):
     try:
         import FreeCAD
@@ -151,39 +143,33 @@ def step2point_cloud(step_file_path, num_points=POINT_NUM):
         except:
             pass
 
-
-# -------------------------- 基于FAISS的相似性匹配核心类（改造后） --------------------------
+# -------------------------- 相似性匹配核心测试类 --------------------------
 class STEPSimilarityMatcher:
     """
-    STEP文件相似性匹配测试类（FAISS优化版）
-    核心：基于预训练PointNet提取特征，FAISS实现高效近邻检索，LightGBM辅助类别得分，按综合得分降序排列
-    优化点：将原O(N)线性检索改为FAISS近邻检索，支持百万级特征库毫秒级响应
+    STEP文件相似性匹配测试类
+    核心：基于预训练PointNet提取特征，LightGBM计算类别匹配得分，按得分降序排列
     """
-
     def __init__(self):
-        """初始化：加载预训练模型、类别映射、净化后特征库，构建/加载FAISS索引"""
-        self.class2idx = None
-        self.idx2class = None
-        self.pointnet_model = None
-        self.lgb_model = None
-        self.clean_feats = None  # 净化后的特征库 (N, 1024)
-        self.clean_labels = None  # 特征库对应标签 (N,)
-        self.clean_file_paths = None  # 特征库对应STEP文件路径 (N,)
+        """初始化：加载预训练模型、类别映射、净化后特征库"""
+        self.class2idx = None  # 类别->数字映射
+        self.idx2class = None  # 数字->类别映射（反向）
+        self.pointnet_model = None  # PointNet特征提取模型
+        self.lgb_model = None  # LightGBM分类模型
+        self.clean_feats = None  # 净化后的特征库（用于精准相似性匹配）
+        self.clean_labels = None  # 特征库对应标签
+        self.clean_file_paths = None  # 特征库对应STEP文件路径
         self.num_classes = 0
-        self.faiss_index = None  # FAISS检索索引
 
         # 加载所有预训练资源
         self._load_class_mapping()
         self._load_pointnet_model()
         self._load_lgb_model()
         self._load_clean_feature_lib()
-        # 核心：构建或加载FAISS索引
-        self._build_or_load_faiss_index()
-        print(f"[INIT] 相似性匹配器（FAISS版）初始化完成")
+        print(f"[INIT] 相似性匹配器初始化完成")
         print(f"[INIT] 类别数：{self.num_classes} | 特征库样本数：{len(self.clean_feats)} | 运行设备：{DEVICE}")
-        print(f"[INIT] FAISS检索设备：{'GPU' if FAISS_DEVICE else 'CPU'} | 索引路径：{FAISS_INDEX_PATH}")
 
     def _load_class_mapping(self):
+        """加载类别映射文件（训练时保存的class2idx.npy）"""
         class2idx_path = os.path.join(MODEL_SAVE_PATH, "class2idx.npy")
         if not os.path.exists(class2idx_path):
             raise FileNotFoundError(f"类别映射文件不存在：{class2idx_path}，请先执行训练脚本")
@@ -192,113 +178,77 @@ class STEPSimilarityMatcher:
         self.num_classes = len(self.class2idx)
 
     def _load_pointnet_model(self):
+        """加载预训练PointNet模型（训练时保存的pointnet_best.pth）"""
         pointnet_path = os.path.join(MODEL_SAVE_PATH, "pointnet_best.pth")
         if not os.path.exists(pointnet_path):
             raise FileNotFoundError(f"PointNet模型文件不存在：{pointnet_path}，请先执行训练脚本")
+        # 初始化模型并加载权重
         self.pointnet_model = PointNetClassifier(self.num_classes).to(DEVICE)
         self.pointnet_model.load_state_dict(torch.load(pointnet_path, map_location=DEVICE))
-        self.pointnet_model.eval()
+        self.pointnet_model.eval()  # 评估模式，关闭Dropout/BatchNorm训练特性
 
     def _load_lgb_model(self):
-        # 注意：与训练脚本保持一致，若训练时保存为.bin则修改为lightgbm_best.bin
+        """加载预训练LightGBM模型（训练时保存的lightgbm_best.txt）"""
         lgb_path = os.path.join(MODEL_SAVE_PATH, "lightgbm_best.txt")
         if not os.path.exists(lgb_path):
-            lgb_path = os.path.join(MODEL_SAVE_PATH, "lightgbm_best.bin")
-            if not os.path.exists(lgb_path):
-                raise FileNotFoundError(f"LightGBM模型文件不存在：{lgb_path}，请先执行训练脚本")
+            raise FileNotFoundError(f"LightGBM模型文件不存在：{lgb_path}，请先执行训练脚本")
         self.lgb_model = lgb.Booster(model_file=lgb_path)
 
     def _load_clean_feature_lib(self):
+        """加载净化后的特征库、标签、文件路径（训练时特征净化的结果）"""
+        # 加载特征和标签
         clean_feat_path = os.path.join(FEATURE_SAVE_PATH, "clean_pointnet_feat.npy")
         clean_label_path = os.path.join(FEATURE_SAVE_PATH, "clean_labels.npy")
-        clean_file_paths_path = os.path.join(FEATURE_SAVE_PATH, "clean_file_paths.npy")
-        if not all(os.path.exists(p) for p in [clean_feat_path, clean_label_path, clean_file_paths_path]):
-            raise FileNotFoundError("净化特征/标签/路径文件缺失，请先执行训练脚本的特征净化步骤")
-
-        self.clean_feats = np.load(clean_feat_path).astype(np.float32)  # FAISS要求float32
+        if not os.path.exists(clean_feat_path) or not os.path.exists(clean_label_path):
+            raise FileNotFoundError("净化特征文件不存在，请先执行训练脚本的特征净化步骤")
+        self.clean_feats = np.load(clean_feat_path)
         self.clean_labels = np.load(clean_label_path)
-        self.clean_file_paths = np.load(clean_file_paths_path, allow_pickle=True).tolist()
 
+        # ========== 修改后：加载训练脚本保存的全量净化路径 ==========
+        clean_file_paths_path = os.path.join(FEATURE_SAVE_PATH, "clean_file_paths.npy")
+        if not os.path.exists(clean_file_paths_path):
+            raise FileNotFoundError("全量净化路径文件不存在，请先重新执行训练脚本的特征净化步骤")
+        self.clean_file_paths = np.load(clean_file_paths_path, allow_pickle=True).tolist()
+        # ===========================================================
+        # 最终校验（双重保障，理论上不会触发）
         if len(self.clean_file_paths) != len(self.clean_feats):
             raise ValueError(f"路径数量与特征数量不匹配！路径：{len(self.clean_file_paths)}，特征：{len(self.clean_feats)}")
 
-    def _build_or_load_faiss_index(self):
-        """
-        构建/加载FAISS检索索引
-        策略：若索引文件存在则直接加载，否则基于净化特征库构建并保存
-        索引类型：IVF_FLAT + L2（归一化后L2等价于余弦相似度），支持GPU/CPU
-        """
-        # 特征归一化（关键：FAISS中L2距离在归一化后与余弦相似度等价，且检索速度更快）
-        feats_normalized = self.clean_feats / (np.linalg.norm(self.clean_feats + 1e-8, axis=1, keepdims=True)).astype(
-            np.float32)
-
-        if os.path.exists(FAISS_INDEX_PATH):
-            # 加载已有索引
-            print(f"[FAISS] 加载预构建索引：{FAISS_INDEX_PATH}")
-            self.faiss_index = faiss.read_index(FAISS_INDEX_PATH)
-        else:
-            # 构建新索引
-            print(f"[FAISS] 构建IVF_FLAT索引（nlist={FAISS_NLIST}）...")
-            feature_dim = self.clean_feats.shape[1]  # 1024
-
-            # 初始化索引：IVF_FLAT（适合中等/大规模特征库）
-            cpu_index = faiss.IndexIVFFlat(
-                faiss.IndexFlatL2(feature_dim),  # 基础索引：L2距离
-                feature_dim,
-                min(FAISS_NLIST, len(feats_normalized) // 10),  # 聚类数不超过样本数的1/10
-                faiss.METRIC_L2
-            )
-            # 训练索引（IVF类索引必须先训练）
-            cpu_index.train(feats_normalized)
-            # 添加特征到索引
-            cpu_index.add(feats_normalized)
-            # 设置检索参数：nprobe=10（检索时遍历的聚类数，值越大精度越高、速度越慢，经验值10-50）
-            cpu_index.nprobe = 10
-
-            self.faiss_index = cpu_index
-            # 保存索引到文件
-            faiss.write_index(self.faiss_index, FAISS_INDEX_PATH)
-            print(f"[FAISS] 索引构建完成并保存至：{FAISS_INDEX_PATH}")
-
-        # 若有GPU，将索引移至GPU加速
-        if FAISS_DEVICE:
-            self.faiss_index = faiss.index_cpu_to_gpu(FAISS_DEVICE, 0, self.faiss_index)
-            print(f"[FAISS] 索引已移至GPU加速")
-
     def extract_single_feature(self, step_file_path):
-        """提取单个STEP文件的PointNet全局特征（与训练时一致，返回float32）"""
+        """
+        提取单个STEP文件的PointNet全局特征（与训练时一致的特征提取流程）
+        :param step_file_path: 单个STEP文件路径
+        :return: (1024,) 全局特征数组，失败返回None
+        """
+        # STEP转标准化点云
         point_cloud = step2point_cloud(step_file_path)
         if point_cloud is None:
             return None
+        # 转换为PointNet输入格式 (1, 3, 1024)
         point_tensor = torch.from_numpy(point_cloud).transpose(0, 1).unsqueeze(0).to(DEVICE).float()
+        # 提取全局特征（关闭梯度计算）
         with torch.no_grad():
             _, feat = self.pointnet_model(point_tensor)
-        feat_np = feat.cpu().numpy().squeeze().astype(np.float32)  # FAISS要求float32
-        return feat_np
+        # 转换为numpy数组 (1024,)
+        return feat.cpu().numpy().squeeze()
 
-    def _faiss_k_nearest_search(self, query_feat, top_k):
+    def _calculate_cosine_similarity(self, query_feat, feat_lib):
         """
-        FAISS近邻检索：返回Top-K相似特征的索引和相似度
-        :param query_feat: 待匹配特征 (1024,) float32
-        :param top_k: 检索前K个近邻
-        :return: (distances, indices) - 距离数组、特征库索引数组
-        注意：归一化后L2距离越小，相似度越高，转换为余弦相似度范围[0,1]
+        计算余弦相似度（衡量特征相似性，值越大越相似，范围[-1,1]）
+        :param query_feat: 查询特征 (D,)
+        :param feat_lib: 特征库 (N, D)
+        :return: (N,) 余弦相似度数组
         """
-        # 特征归一化（与索引保持一致）
-        query_normalized = query_feat / (np.linalg.norm(query_feat + 1e-8)).astype(np.float32)
-        query_2d = query_normalized.reshape(1, -1)  # FAISS要求2D输入
-
-        # FAISS检索：返回 (距离数组, 索引数组)，形状均为(1, top_k)
-        distances, indices = self.faiss_index.search(query_2d, min(top_k, len(self.clean_feats)))
-
-        # 转换L2距离为余弦相似度（归一化后：cos_sim = 1 - L2^2 / 2），范围[0,1]
-        cos_sim = 1 - (distances ** 2) / 2
-
-        return cos_sim.squeeze(), indices.squeeze()  # 降维为一维数组
+        # 归一化特征（避免尺度影响）
+        query_feat = query_feat / np.linalg.norm(query_feat + 1e-8)
+        feat_lib = feat_lib / (np.linalg.norm(feat_lib + 1e-8, axis=1, keepdims=True))
+        # 计算余弦相似度
+        similarity = np.dot(feat_lib, query_feat)
+        return similarity
 
     def match_single_file(self, step_file_path, top_k=5, save_result=False):
         """
-        单STEP文件相似性匹配（FAISS优化版）：返回Top-K相似结果，完全兼容原结果格式
+        单STEP文件相似性匹配：返回Top-K相似的STEP文件/类别，按得分降序排列
         :param step_file_path: 待匹配的STEP文件路径
         :param top_k: 返回前K个相似结果，默认5
         :param save_result: 是否保存匹配结果到CSV，默认False
@@ -312,49 +262,48 @@ class STEPSimilarityMatcher:
         query_feat = self.extract_single_feature(step_file_path)
         if query_feat is None:
             raise RuntimeError(f"无法提取{step_file_path}的特征，匹配终止")
-        query_feat_2d = query_feat.reshape(1, -1)
+        query_feat_2d = query_feat.reshape(1, -1)  # LGBM输入格式
 
-        # 步骤2：FAISS高效检索Top-K近邻（核心优化点，替换原线性计算）
-        cos_sim, top_k_indices = self._faiss_k_nearest_search(query_feat, top_k)
-        # 筛选特征库中对应的Top-K数据
-        top_k_feats = self.clean_feats[top_k_indices]
-        top_k_labels = self.clean_labels[top_k_indices]
-        top_k_file_paths = [self.clean_file_paths[i] for i in top_k_indices]
-
-        # 步骤3：计算LightGBM类别得分
+        # 步骤2：计算两类得分
+        # 2.1 LightGBM类别匹配得分（概率，对应各类别的相似性）
         lgb_score = self.lgb_model.predict(query_feat_2d, num_iteration=self.lgb_model.best_iteration)[0]
-        top_k_lgb_scores = [lgb_score[idx] for idx in top_k_labels]
-
-        # 步骤4：计算综合得分（与原逻辑完全一致，归一化后加权）
+        # 2.2 余弦相似度（与特征库中每个样本的精准相似性）
+        cos_sim = self._calculate_cosine_similarity(query_feat, self.clean_feats)
+        # 2.3 综合得分（归一化后加权，兼顾类别概率和精准特征相似性，权重可调整）
         lgb_score_norm = (lgb_score - lgb_score.min()) / (lgb_score.max() - lgb_score.min() + 1e-8)
         cos_sim_norm = (cos_sim - cos_sim.min()) / (cos_sim.max() - cos_sim.min() + 1e-8)
-        top_k_combined = 0.4 * lgb_score_norm[top_k_labels] + 0.6 * cos_sim_norm
+        combined_score = 0.4 * lgb_score_norm[self.clean_labels] + 0.6 * cos_sim_norm  # 余弦相似度权重更高
 
-        # 步骤5：构造结果数据（与原格式完全一致）
+        # 步骤3：构造结果数据
         result_data = {
-            "匹配文件路径": top_k_file_paths,
-            "相似类别": [self.idx2class[idx] for idx in top_k_labels],
-            "余弦相似度": cos_sim.round(4),
-            "LGBM类别得分": np.array(top_k_lgb_scores).round(4),
-            "综合得分": top_k_combined.round(4)
+            "匹配文件路径": self.clean_file_paths,
+            "相似类别": [self.idx2class[idx] for idx in self.clean_labels],
+            "余弦相似度": cos_sim,
+            "LGBM类别得分": [lgb_score[idx] for idx in self.clean_labels],
+            "综合得分": combined_score
         }
-        result_df = pd.DataFrame(result_data).reset_index(drop=True)
+        result_df = pd.DataFrame(result_data)
 
-        # 保存结果
+        # 步骤4：按综合得分降序排列，取Top-K
+        result_df_sorted = result_df.sort_values(by="综合得分", ascending=False).head(top_k).reset_index(drop=True)
+        # 保留4位小数，提升可读性
+        for col in ["余弦相似度", "LGBM类别得分", "综合得分"]:
+            result_df_sorted[col] = result_df_sorted[col].round(4)
+
+        # 步骤5：保存结果（若需要）
         if save_result:
-            save_name = f"FAISS相似性匹配结果_{os.path.basename(step_file_path)}.csv"
-            save_path = os.path.join(VIS_SAVE_PATH, save_name)
-            result_df.to_csv(save_path, index=False, encoding="utf-8-sig")
+            save_path = os.path.join(VIS_SAVE_PATH, f"相似性匹配结果_{os.path.basename(step_file_path)}.csv")
+            result_df_sorted.to_csv(save_path, index=False, encoding="utf-8-sig")
             print(f"[SAVE] 匹配结果已保存至：{save_path}")
 
-        # 打印结果
-        print(f"[RESULT] FAISS检索前{top_k}个相似结果（按综合得分降序）：")
-        print(result_df.to_string(index=False))
-        return result_df
+        # 打印匹配结果
+        print(f"[RESULT] 前{top_k}个相似结果（按综合得分降序）：")
+        print(result_df_sorted.to_string(index=False))
+        return result_df_sorted
 
     def match_batch_files(self, step_dir, top_k=5, save_result=True):
         """
-        批量匹配文件夹下的所有STEP文件（FAISS优化版），完全兼容原调用和结果格式
+        批量匹配文件夹下的所有STEP文件
         :param step_dir: STEP文件所在文件夹
         :param top_k: 每个文件返回前K个相似结果，默认5
         :param save_result: 是否保存批量结果到CSV，默认True
@@ -363,47 +312,51 @@ class STEPSimilarityMatcher:
         if not os.path.isdir(step_dir):
             raise NotADirectoryError(f"无效的文件夹路径：{step_dir}")
 
+        # 遍历文件夹下所有STEP文件
         step_files = [os.path.join(step_dir, f) for f in os.listdir(step_dir)
                       if f.lower().endswith((".step", ".stp"))]
         if len(step_files) == 0:
             raise FileNotFoundError(f"文件夹{step_dir}下未找到STEP/STP文件")
 
-        print(f"\n[BATCH MATCH] FAISS批量匹配开始，共{len(step_files)}个STEP文件")
+        print(f"\n[BATCH MATCH] 开始批量匹配，共{len(step_files)}个STEP文件")
         batch_result = []
-        for step_file in tqdm(step_files, desc="FAISS批量匹配进度"):
+        for step_file in tqdm(step_files, desc="批量匹配进度"):
             try:
+                # 单文件匹配
                 single_result = self.match_single_file(step_file, top_k=top_k, save_result=False)
+                # 增加待匹配文件列
                 single_result["待匹配文件"] = os.path.basename(step_file)
                 batch_result.append(single_result)
             except Exception as e:
-                print(f"[SKIP] 跳过文件{os.path.basename(step_file)}：{str(e)[:50]}...")
+                print(f"[SKIP] 跳过文件{os.path.basename(step_file)}：{str(e)}")
                 continue
 
+        # 合并批量结果
         if len(batch_result) == 0:
-            raise RuntimeError("FAISS批量匹配无有效结果")
-
+            raise RuntimeError("批量匹配无有效结果")
         final_batch_df = pd.concat(batch_result, ignore_index=True)
+        # 调整列顺序，更直观
         col_order = ["待匹配文件", "匹配文件路径", "相似类别", "余弦相似度", "LGBM类别得分", "综合得分"]
         final_batch_df = final_batch_df[col_order]
 
+        # 保存批量结果
         if save_result:
-            save_path = os.path.join(VIS_SAVE_PATH, "FAISS批量相似性匹配结果.csv")
+            save_path = os.path.join(VIS_SAVE_PATH, "批量相似性匹配结果.csv")
             final_batch_df.to_csv(save_path, index=False, encoding="utf-8-sig")
-            print(f"\n[SAVE] FAISS批量匹配结果已保存至：{save_path}")
+            print(f"\n[SAVE] 批量匹配结果已保存至：{save_path}")
 
-        print(f"\n[BATCH DONE] FAISS批量匹配完成，有效匹配{len(batch_result)}个文件")
+        print(f"\n[BATCH DONE] 批量匹配完成，有效匹配{len(batch_result)}个文件")
         return final_batch_df
 
-
-# -------------------------- 测试示例（与原代码完全一致） --------------------------
+# -------------------------- 测试示例 --------------------------
 if __name__ == "__main__":
-    # 1. 初始化FAISS版相似性匹配器（自动加载/构建索引）
+    # 1. 初始化相似性匹配器
     matcher = STEPSimilarityMatcher()
 
-    # 2. 单文件相似性匹配（替换为你的测试文件）
+    # 2. 单文件相似性匹配（示例：替换为你的测试STEP文件路径）
     test_step_file = r"D:\graduate\cad\pointnet\Opencascade\modesearch\testdata\0\国家标准GB_GB_T19066.2-2020A11508.step"
     matcher.match_single_file(test_step_file, top_k=10, save_result=True)
 
-    # 3. 批量文件相似性匹配（替换为你的测试文件夹）
-    # test_step_dir = r"D:\graduate\cad\pointnet\Opencascade\modesearch\testdata"
+    # 3. 批量文件相似性匹配（示例：替换为你的STEP文件夹路径）
+    # test_step_dir = r"D:\graduate\cad\pointnet\Opencascade\step\标准件\GB国家标准\测试集"
     # matcher.match_batch_files(test_step_dir, top_k=5, save_result=True)
